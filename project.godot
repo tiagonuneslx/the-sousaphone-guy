@@ -23,6 +23,11 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="C:/Users/Tiago Nunes/Documents/the-sousaphone-guy---jetpack-joyride-clone/recordings/demo.avi"
+
 [input]
 
 left_click={
