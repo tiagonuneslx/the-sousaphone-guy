@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://5vemn23actcr"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_hoa8q"]
+[ext_resource type="Script" uid="uid://drh2in1o0fq8i" path="res://player.gd" id="1_hoa8q"]
 [ext_resource type="Texture2D" uid="uid://baydxnabsykd" path="res://art/character.png" id="2_a16bm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dyu2k"]
@@ -10,6 +10,7 @@ size = Vector2(34, 88)
 mass = 100.0
 gravity_scale = 1.5
 lock_rotation = true
+continuous_cd = 2
 max_contacts_reported = 2
 script = ExtResource("1_hoa8q")
 
@@ -19,3 +20,7 @@ texture = ExtResource("2_a16bm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
 shape = SubResource("RectangleShape2D_dyu2k")
+debug_color = Color(0.78977, 0.704558, 0.151053, 0.45098)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
