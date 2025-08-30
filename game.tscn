@@ -3,9 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
 [ext_resource type="PackedScene" uid="uid://5vemn23actcr" path="res://player.tscn" id="2_6wbtu"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_11m6u"]
-size = Vector2(672, 37.625)
+[ext_resource type="PackedScene" uid="uid://dow6x6cd3kbd0" path="res://wall.tscn" id="4_fc0e3"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lp6ye")
@@ -13,24 +11,13 @@ script = ExtResource("1_lp6ye")
 [node name="Background" parent="." instance=ExtResource("1_2bh5a")]
 
 [node name="Player" parent="." instance=ExtResource("2_6wbtu")]
-position = Vector2(101, 299)
+position = Vector2(83, 330)
+collision_layer = 2
+collision_mask = 5
 contact_monitor = true
+max_contacts_reported = 3
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(169, 340)
+[node name="Floor" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(0, 360)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(146, 18.8125)
-shape = SubResource("RectangleShape2D_11m6u")
-debug_color = Color(0.0313726, 0.054902, 0.0470588, 0.729412)
-
-[node name="Ceiling" type="StaticBody2D" parent="."]
-position = Vector2(169, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
-position = Vector2(157, 0)
-rotation = 3.14159
-shape = SubResource("RectangleShape2D_11m6u")
-one_way_collision = true
-one_way_collision_margin = 128.0
-debug_color = Color(0.0318537, 0.0531121, 0.0467698, 0.729412)
+[node name="Ceiling" parent="." instance=ExtResource("4_fc0e3")]

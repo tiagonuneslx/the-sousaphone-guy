@@ -3,24 +3,23 @@
 [ext_resource type="Script" uid="uid://drh2in1o0fq8i" path="res://player.gd" id="1_hoa8q"]
 [ext_resource type="Texture2D" uid="uid://baydxnabsykd" path="res://art/character.png" id="2_a16bm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyu2k"]
-size = Vector2(34, 88)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 9.0
+height = 52.0
 
 [node name="Player" type="RigidBody2D"]
 mass = 100.0
-gravity_scale = 1.5
+can_sleep = false
 lock_rotation = true
 continuous_cd = 2
 max_contacts_reported = 2
 script = ExtResource("1_hoa8q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(23, -29)
 texture = ExtResource("2_a16bm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -2)
-shape = SubResource("RectangleShape2D_dyu2k")
+position = Vector2(26, -30)
+shape = SubResource("CapsuleShape2D_onrkg")
 debug_color = Color(0.78977, 0.704558, 0.151053, 0.45098)
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]

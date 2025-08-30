@@ -1,7 +1,7 @@
 extends ParallaxBackground
 
 
-@export var scroll_speed = 140
+var scroll_speed := 140.0
 
 
 func _ready() -> void:
