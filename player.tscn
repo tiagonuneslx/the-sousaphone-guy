@@ -8,6 +8,7 @@ radius = 9.0
 height = 52.0
 
 [node name="Player" type="RigidBody2D"]
+z_index = 2
 mass = 100.0
 can_sleep = false
 lock_rotation = true
@@ -16,10 +17,10 @@ max_contacts_reported = 2
 script = ExtResource("1_hoa8q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(23, -29)
+position = Vector2(-3, -25)
 texture = ExtResource("2_a16bm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(26, -30)
+position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_onrkg")
 debug_color = Color(0.78977, 0.704558, 0.151053, 0.45098)
