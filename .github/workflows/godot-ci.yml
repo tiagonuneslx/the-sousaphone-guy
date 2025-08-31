@@ -62,7 +62,8 @@ jobs:
         with:
           path: build/web
 
-  deploy:
+  deploy-to-gh-pages:
+    name: Deploy to GitHub Pages
     permissions:
       contents: read
       pages: write
