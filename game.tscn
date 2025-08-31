@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4wlshil6gj0e"]
+[gd_scene load_steps=6 format=3 uid="uid://c4wlshil6gj0e"]
 
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
 [ext_resource type="PackedScene" uid="uid://5vemn23actcr" path="res://player.tscn" id="2_6wbtu"]
 [ext_resource type="PackedScene" uid="uid://dow6x6cd3kbd0" path="res://wall.tscn" id="4_fc0e3"]
+[ext_resource type="AudioStream" uid="uid://yoketxn31yeb" path="res://audio/background-music.wav" id="5_7jktm"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lp6ye")
@@ -22,3 +23,7 @@ position = Vector2(0, 330)
 scale = Vector2(1, -1)
 
 [node name="Ceiling" parent="." instance=ExtResource("4_fc0e3")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7jktm")
+autoplay = true
