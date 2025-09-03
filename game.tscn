@@ -27,3 +27,22 @@ scale = Vector2(1, -1)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_7jktm")
 autoplay = true
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Distance" type="Label" parent="GUI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+text = "0m"
+
+[node name="Speed" type="Label" parent="GUI"]
+offset_left = 515.0
+offset_top = 4.0
+offset_right = 636.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(1, 0.151344, 0.108333, 1)
+theme_override_font_sizes/font_size = 10
+text = "Speed: 140 px/s"
+horizontal_alignment = 2

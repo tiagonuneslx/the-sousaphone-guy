@@ -1,7 +1,7 @@
 extends ParallaxBackground
 
 
-var scroll_speed := 140.0
+var scroll_speed: float
 
 
 func _ready() -> void:
