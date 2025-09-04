@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4wlshil6gj0e"]
+[gd_scene load_steps=7 format=3 uid="uid://c4wlshil6gj0e"]
 
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
 [ext_resource type="PackedScene" uid="uid://5vemn23actcr" path="res://player.tscn" id="2_6wbtu"]
 [ext_resource type="PackedScene" uid="uid://dow6x6cd3kbd0" path="res://wall.tscn" id="4_fc0e3"]
 [ext_resource type="AudioStream" uid="uid://yoketxn31yeb" path="res://audio/background-music.wav" id="5_7jktm"]
+[ext_resource type="FontFile" uid="uid://b0pghnr33yf2h" path="res://fonts/Peaberry-Base.otf" id="6_ryrav"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lp6ye")
@@ -12,7 +13,7 @@ script = ExtResource("1_lp6ye")
 [node name="Background" parent="." instance=ExtResource("1_2bh5a")]
 
 [node name="Player" parent="." instance=ExtResource("2_6wbtu")]
-position = Vector2(83, 330)
+position = Vector2(140, 330)
 collision_layer = 2
 collision_mask = 5
 contact_monitor = true
@@ -35,6 +36,10 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_ryrav")
+theme_override_font_sizes/font_size = 24
 text = "0m"
 
 [node name="Speed" type="Label" parent="GUI"]
@@ -46,3 +51,13 @@ theme_override_colors/font_color = Color(1, 0.151344, 0.108333, 1)
 theme_override_font_sizes/font_size = 10
 text = "Speed: 140 px/s"
 horizontal_alignment = 2
+
+[node name="BestDistance" type="Label" parent="GUI"]
+offset_left = 10.0
+offset_top = 33.0
+offset_right = 68.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.144063, 0.144063, 0.144062, 1)
+theme_override_fonts/font = ExtResource("6_ryrav")
+theme_override_font_sizes/font_size = 16
+text = "Best: 0"
