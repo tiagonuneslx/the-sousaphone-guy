@@ -1,12 +1,22 @@
 extends RigidBody2D
+class_name Player
 
+signal die
+
+@export var ground: Node2D
 
 var jump_force := 200_000.0
 var max_speed := 600.0
+var can_jump := false
+
+
+func _ready() -> void:
+	$Shadow.ground = ground
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	jump_on_left_click(state)
+	if can_jump:
+		jump_on_left_click(state)
 	cap_velocity(state)
 
 
@@ -20,3 +30,7 @@ func jump_on_left_click(state: PhysicsDirectBodyState2D):
 func cap_velocity(state: PhysicsDirectBodyState2D):
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
+
+
+func _on_hurtbox_hit(_hitbox: Hitbox) -> void:
+	die.emit()

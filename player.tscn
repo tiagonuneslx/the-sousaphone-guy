@@ -1,19 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://5vemn23actcr"]
+[gd_scene load_steps=7 format=3 uid="uid://5vemn23actcr"]
 
 [ext_resource type="Script" uid="uid://drh2in1o0fq8i" path="res://player.gd" id="1_hoa8q"]
 [ext_resource type="Texture2D" uid="uid://baydxnabsykd" path="res://art/character.png" id="2_a16bm"]
+[ext_resource type="PackedScene" uid="uid://dtwshw5r7bdtu" path="res://hurtbox.tscn" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://chtkvd2ldiq4m" path="res://shadow.tscn" id="4_hqtel"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
+size = Vector2(32, 54)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3pqv"]
 radius = 9.0
-height = 52.0
+height = 50.0
 
 [node name="Player" type="RigidBody2D"]
 z_index = 2
+collision_layer = 2
 mass = 100.0
 can_sleep = false
 lock_rotation = true
 continuous_cd = 2
-max_contacts_reported = 2
+max_contacts_reported = 5
 script = ExtResource("1_hoa8q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,6 +27,20 @@ position = Vector2(-3, -25)
 texture = ExtResource("2_a16bm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -26)
-shape = SubResource("CapsuleShape2D_onrkg")
+position = Vector2(3, -27)
+shape = SubResource("RectangleShape2D_i3pqv")
 debug_color = Color(0.78977, 0.704558, 0.151053, 0.45098)
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_i3pqv")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_i3pqv")
+debug_color = Color(0.8908206, 0.2485429, 0.2737546, 0.41960785)
+
+[node name="Shadow" parent="." instance=ExtResource("4_hqtel")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]

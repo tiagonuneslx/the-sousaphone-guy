@@ -1,4 +1,5 @@
 extends ParallaxBackground
+class_name Background
 
 
 var scroll_speed: float

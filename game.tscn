@@ -1,23 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4wlshil6gj0e"]
+[gd_scene load_steps=15 format=3 uid="uid://c4wlshil6gj0e"]
 
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
 [ext_resource type="PackedScene" uid="uid://5vemn23actcr" path="res://player.tscn" id="2_6wbtu"]
 [ext_resource type="PackedScene" uid="uid://dow6x6cd3kbd0" path="res://wall.tscn" id="4_fc0e3"]
 [ext_resource type="AudioStream" uid="uid://yoketxn31yeb" path="res://audio/background-music.wav" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://dma8byv2yh6k5" path="res://obstacle_spawner.gd" id="5_lc2xo"]
+[ext_resource type="Script" uid="uid://yhdtdejk6tvg" path="res://gui_canvas_layer.gd" id="6_mfdv2"]
 [ext_resource type="FontFile" uid="uid://b0pghnr33yf2h" path="res://fonts/Peaberry-Base.otf" id="6_ryrav"]
+[ext_resource type="PackedScene" uid="uid://b04aiwjncu7xf" path="res://frying_pan_obstacle.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://b3ikdvndyjwoq" path="res://state_machine.tscn" id="8_j5wjh"]
+[ext_resource type="Script" uid="uid://bvcwqnuj51385" path="res://play_state.gd" id="9_vef74"]
+[ext_resource type="Script" uid="uid://b2ge7rfkft3i" path="res://game_over_state.gd" id="10_hve3p"]
+[ext_resource type="Script" uid="uid://1ujp16yj4jcj" path="res://debug_control_group.gd" id="10_lc2xo"]
+[ext_resource type="Script" uid="uid://cult1f7vu1xvf" path="res://game_over_control_group.gd" id="11_215e1"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lp6ye")
 
 [node name="Background" parent="." instance=ExtResource("1_2bh5a")]
 
-[node name="Player" parent="." instance=ExtResource("2_6wbtu")]
+[node name="Player" parent="." node_paths=PackedStringArray("ground") instance=ExtResource("2_6wbtu")]
 position = Vector2(140, 330)
-collision_layer = 2
-collision_mask = 5
-contact_monitor = true
-max_contacts_reported = 3
+ground = NodePath("../Ground")
 
 [node name="Ground" parent="." instance=ExtResource("4_fc0e3")]
 position = Vector2(0, 330)
@@ -25,13 +30,23 @@ scale = Vector2(1, -1)
 
 [node name="Ceiling" parent="." instance=ExtResource("4_fc0e3")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+script = ExtResource("5_lc2xo")
+obstacle_scenes = Array[PackedScene]([ExtResource("7_eow3j")])
+
+[node name="SpawnTimer" type="Timer" parent="ObstacleSpawner"]
+wait_time = 2.0
+
+[node name="ObstaclesContainer" type="Node2D" parent="ObstacleSpawner"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_7jktm")
 autoplay = true
 
-[node name="GUI" type="CanvasLayer" parent="."]
+[node name="GUICanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("6_mfdv2")
 
-[node name="Distance" type="Label" parent="GUI"]
+[node name="DistanceLabel" type="Label" parent="GUICanvasLayer"]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
@@ -42,7 +57,25 @@ theme_override_fonts/font = ExtResource("6_ryrav")
 theme_override_font_sizes/font_size = 24
 text = "0m"
 
-[node name="Speed" type="Label" parent="GUI"]
+[node name="BestDistanceLabel" type="Label" parent="GUICanvasLayer"]
+offset_left = 10.0
+offset_top = 33.0
+offset_right = 68.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.144063, 0.144063, 0.144062, 1)
+theme_override_fonts/font = ExtResource("6_ryrav")
+theme_override_font_sizes/font_size = 16
+text = "Best: 0"
+
+[node name="DebugControlGroup" type="Control" parent="GUICanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_lc2xo")
+
+[node name="SpeedLabel" type="Label" parent="GUICanvasLayer/DebugControlGroup"]
+layout_mode = 0
 offset_left = 515.0
 offset_top = 4.0
 offset_right = 636.0
@@ -52,12 +85,50 @@ theme_override_font_sizes/font_size = 10
 text = "Speed: 140 px/s"
 horizontal_alignment = 2
 
-[node name="BestDistance" type="Label" parent="GUI"]
-offset_left = 10.0
-offset_top = 33.0
-offset_right = 68.0
-offset_bottom = 56.0
-theme_override_colors/font_color = Color(0.144063, 0.144063, 0.144062, 1)
+[node name="GameOverControlGroup" type="Control" parent="GUICanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_215e1")
+
+[node name="GameOverLabel" type="Label" parent="GUICanvasLayer/GameOverControlGroup"]
+layout_mode = 0
+offset_top = 124.0
+offset_right = 640.0
+offset_bottom = 175.0
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("6_ryrav")
-theme_override_font_sizes/font_size = 16
-text = "Best: 0"
+theme_override_font_sizes/font_size = 57
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="RestartLabel" type="RichTextLabel" parent="GUICanvasLayer/GameOverControlGroup"]
+layout_mode = 0
+offset_top = 183.0
+offset_right = 640.0
+offset_bottom = 223.0
+theme_override_colors/default_color = Color(0.83293825, 0.81713194, 0.8235224, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("6_ryrav")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Press [color=white][outline_color=black]space[/outline_color][/color] to restart"
+horizontal_alignment = 1
+
+[node name="GameStateMachine" parent="." node_paths=PackedStringArray("game", "initial_state") instance=ExtResource("8_j5wjh")]
+game = NodePath("..")
+initial_state = NodePath("PlayState")
+
+[node name="PlayState" type="Node" parent="GameStateMachine"]
+script = ExtResource("9_vef74")
+metadata/_custom_type_script = "uid://bwsk2o6ua5od6"
+
+[node name="GameOverState" type="Node" parent="GameStateMachine"]
+script = ExtResource("10_hve3p")
+metadata/_custom_type_script = "uid://bwsk2o6ua5od6"
+
+[connection signal="die" from="Player" to="GameStateMachine/PlayState" method="_on_player_die"]
+[connection signal="timeout" from="ObstacleSpawner/SpawnTimer" to="ObstacleSpawner" method="_on_spawn_timer_timeout"]

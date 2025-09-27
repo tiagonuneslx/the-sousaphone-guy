@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6wfdnjwxavq1"]
+
+[ext_resource type="Script" uid="uid://spy1hp3r67ml" path="res://ragdoll_spawner.gd" id="1_s1edl"]
+
+[node name="RagdollSpawner" type="Node2D"]
+script = ExtResource("1_s1edl")

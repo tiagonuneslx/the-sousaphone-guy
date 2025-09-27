@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://spiagmap1r73"]
+
+[ext_resource type="Script" uid="uid://sv1usg4qlyty" path="res://state.gd" id="1_1c6mt"]
+
+[node name="State" type="Node"]
+script = ExtResource("1_1c6mt")
