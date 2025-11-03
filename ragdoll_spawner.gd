@@ -3,6 +3,7 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
+
 func spawn_ragdoll() -> void:
 	print_debug(get_parent().name + ".spawn_ragdoll()")
 	var ragdoll = RigidBody2D.new()
@@ -14,7 +15,7 @@ func spawn_ragdoll() -> void:
 	ragdoll.global_rotation = get_parent().global_rotation
 	ragdoll.add_child(sprite.duplicate())
 	ragdoll.add_child(collision_shape.duplicate())
-	get_parent().get_parent().add_child(ragdoll)
+	(func(): get_parent().get_parent().add_child(ragdoll)).call_deferred()
 	var impulse_direction = Vector2.from_angle(-PI / 4)
 	var impulse_vector = impulse_direction * 200
 	ragdoll.apply_impulse(impulse_vector)

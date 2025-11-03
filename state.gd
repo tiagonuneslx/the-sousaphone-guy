@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-signal transition
+@warning_ignore("unused_signal") signal transition
 
 var key: String
 

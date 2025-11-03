@@ -16,7 +16,13 @@ func exit() -> void:
 
 func process(_delta: float) -> void:
 	if Input.is_action_just_pressed("start"):
-		transition.emit(self, PlayState.KEY)
+		restart_game()
 
 func physics_process(_delta: float) -> void:
 	pass
+
+func restart_game() -> void:
+	transition.emit(self, PlayState.KEY)
+
+func _on_restart_button_pressed() -> void:
+	restart_game()

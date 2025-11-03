@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4wlshil6gj0e"]
+[gd_scene load_steps=17 format=3 uid="uid://c4wlshil6gj0e"]
 
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://b2ge7rfkft3i" path="res://game_over_state.gd" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://1ujp16yj4jcj" path="res://debug_control_group.gd" id="10_lc2xo"]
 [ext_resource type="Script" uid="uid://cult1f7vu1xvf" path="res://game_over_control_group.gd" id="11_215e1"]
+[ext_resource type="Texture2D" uid="uid://dxv51dar68wcm" path="res://art/Space_Key_Light.png" id="12_80cx4"]
+[ext_resource type="Texture2D" uid="uid://bqbnxc2ipb287" path="res://art/Pointer.png" id="13_e8heu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lp6ye")
@@ -104,19 +106,49 @@ theme_override_font_sizes/font_size = 57
 text = "Game Over"
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="GUICanvasLayer/GameOverControlGroup"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 179.0
+offset_right = 468.0
+offset_bottom = 217.0
+
 [node name="RestartLabel" type="RichTextLabel" parent="GUICanvasLayer/GameOverControlGroup"]
 layout_mode = 0
-offset_top = 183.0
-offset_right = 640.0
-offset_bottom = 223.0
+offset_left = 16.0
+offset_top = 187.0
+offset_right = 656.0
+offset_bottom = 227.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.83293825, 0.81713194, 0.8235224, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("6_ryrav")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "Press [color=white][outline_color=black]space[/outline_color][/color] to restart"
+text = "[color=white][outline_color=black]/        to restart[/outline_color][/color]"
+scroll_active = false
 horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="GUICanvasLayer/GameOverControlGroup"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 171.0
+offset_right = 310.4776
+offset_bottom = 225.0
+mouse_filter = 2
+texture = ExtResource("12_80cx4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="GUICanvasLayer/GameOverControlGroup"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 183.0
+offset_right = 223.0
+offset_bottom = 215.0
+mouse_filter = 2
+texture = ExtResource("13_e8heu")
 
 [node name="GameStateMachine" parent="." node_paths=PackedStringArray("game", "initial_state") instance=ExtResource("8_j5wjh")]
 game = NodePath("..")
@@ -132,3 +164,4 @@ metadata/_custom_type_script = "uid://bwsk2o6ua5od6"
 
 [connection signal="die" from="Player" to="GameStateMachine/PlayState" method="_on_player_die"]
 [connection signal="timeout" from="ObstacleSpawner/SpawnTimer" to="ObstacleSpawner" method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="GUICanvasLayer/GameOverControlGroup/Button" to="GameStateMachine/GameOverState" method="_on_restart_button_pressed"]
