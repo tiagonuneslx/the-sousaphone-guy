@@ -30,3 +30,4 @@ func _on_spawn_timer_timeout() -> void:
 	var new_obstacle: Node2D = obstacle_to_spawn.instantiate()
 	new_obstacle.global_position = Vector2(spawn_x, spawn_y)
 	obstacles_container.add_child(new_obstacle)
+	print_debug(new_obstacle.name + ".spawn()")

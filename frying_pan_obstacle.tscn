@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b04aiwjncu7xf"]
+[gd_scene load_steps=8 format=3 uid="uid://b04aiwjncu7xf"]
 
 [ext_resource type="Script" uid="uid://d7j8oubjlhym" path="res://frying_pan_obstacle.gd" id="1_h1bxq"]
 [ext_resource type="Texture2D" uid="uid://cc0c2cwx23toc" path="res://art/frying-pan.png" id="1_swpmt"]
 [ext_resource type="PackedScene" uid="uid://bip7twoywg8d4" path="res://despawner.tscn" id="3_1y0jf"]
 [ext_resource type="PackedScene" uid="uid://bikwgjbe1u0ok" path="res://hitbox.tscn" id="4_h634x"]
 [ext_resource type="PackedScene" uid="uid://6wfdnjwxavq1" path="res://ragdoll_spawner.tscn" id="5_h634x"]
+[ext_resource type="PackedScene" uid="uid://chtkvd2ldiq4m" path="res://shadow.tscn" id="6_oxs2h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h634x"]
 radius = 13.0
@@ -14,23 +15,11 @@ height = 32.0
 z_index = 3
 script = ExtResource("1_h1bxq")
 
+[node name="Despawner" parent="." instance=ExtResource("3_1y0jf")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(10, 0.5)
 texture = ExtResource("1_swpmt")
-
-[node name="Despawner" parent="." instance=ExtResource("3_1y0jf")]
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-17, -14, 54, 29)
-
-[node name="Hitbox" parent="." instance=ExtResource("4_h634x")]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_h634x")
-debug_color = Color(0.86512977, 0.3169942, 0.43462604, 0.41960785)
 
 [node name="RagdollSpawner" parent="." instance=ExtResource("5_h634x")]
 visible = false
@@ -40,6 +29,20 @@ position = Vector2(10, 0.5)
 texture = ExtResource("1_swpmt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollSpawner"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_h634x")
+debug_color = Color(0.86512977, 0.3169942, 0.43462604, 0.41960785)
+
+[node name="Shadow" parent="." instance=ExtResource("6_oxs2h")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-17, -14, 54, 29)
+
+[node name="Hitbox" parent="." instance=ExtResource("4_h634x")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_h634x")
 debug_color = Color(0.86512977, 0.3169942, 0.43462604, 0.41960785)

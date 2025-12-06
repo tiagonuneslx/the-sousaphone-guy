@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4wlshil6gj0e"]
+[gd_scene load_steps=18 format=3 uid="uid://c4wlshil6gj0e"]
 
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
@@ -17,20 +17,26 @@
 [ext_resource type="Texture2D" uid="uid://dxv51dar68wcm" path="res://art/Space_Key_Light.png" id="12_80cx4"]
 [ext_resource type="Texture2D" uid="uid://bqbnxc2ipb287" path="res://art/Pointer.png" id="13_e8heu"]
 
+[sub_resource type="GDScript" id="GDScript_80cx4"]
+script/source = "extends StaticBody2D
+class_name Wall
+"
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lp6ye")
 
 [node name="Background" parent="." instance=ExtResource("1_2bh5a")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("ground") instance=ExtResource("2_6wbtu")]
-position = Vector2(140, 330)
-ground = NodePath("../Ground")
-
 [node name="Ground" parent="." instance=ExtResource("4_fc0e3")]
 position = Vector2(0, 330)
 scale = Vector2(1, -1)
+script = SubResource("GDScript_80cx4")
 
 [node name="Ceiling" parent="." instance=ExtResource("4_fc0e3")]
+script = SubResource("GDScript_80cx4")
+
+[node name="Player" parent="." instance=ExtResource("2_6wbtu")]
+position = Vector2(140, 330)
 
 [node name="ObstacleSpawner" type="Node2D" parent="."]
 script = ExtResource("5_lc2xo")

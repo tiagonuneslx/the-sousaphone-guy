@@ -17,6 +17,10 @@ boot_splash/show_image=false
 config/icon="res://icon.svg"
 config/max_fps=0
 
+[autoload]
+
+Global="*res://global.gd"
+
 [display]
 
 window/size/viewport_width=640

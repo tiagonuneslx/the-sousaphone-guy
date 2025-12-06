@@ -7,6 +7,8 @@ class_name Game
 @onready var gui: GUICanvasLayer = $GUICanvasLayer
 @onready var obstacle_spawner: ObstacleSpawner = $ObstacleSpawner
 @onready var game_sate_machine: StateMachine = $GameStateMachine
+@onready var ground: Node2D = $Ground
+@onready var ceiling: Node2D = $Ceiling
 
 var best_score: int = 0
 

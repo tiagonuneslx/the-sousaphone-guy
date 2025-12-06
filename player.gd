@@ -3,15 +3,11 @@ class_name Player
 
 signal die
 
-@export var ground: Node2D
+@onready var shadow: Shadow = $Shadow
 
 var jump_force := 200_000.0
 var max_speed := 600.0
 var can_jump := false
-
-
-func _ready() -> void:
-	$Shadow.ground = ground
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
