@@ -2,7 +2,7 @@ class_name Shadow
 extends Node2D
 
 @export var base_radius := DEFAULT_BASE_RADIUS
-var base_alpha := 0.1
+var base_alpha := 0.2
 
 var _radius := 0.0
 var _alpha := 0.0
@@ -26,8 +26,8 @@ func calculate_radius_and_alpha():
 	var current_height = Global.get_game().ground.global_position.y - get_parent().global_position.y
 	var max_height = get_window().size.y
 	var height_progress = clamp(current_height / max_height, 0.0, 1.0)
-	_radius = base_radius * (1.0 - 0.1 * height_progress)
-	_alpha = base_alpha * (1.0 - 1.6 * height_progress)
+	_radius = base_radius * (1.0 - 1 * height_progress)
+	_alpha = base_alpha * (1.0 - 4 * height_progress)
 
 
 func update_position():

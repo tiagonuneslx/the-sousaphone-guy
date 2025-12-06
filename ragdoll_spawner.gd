@@ -14,10 +14,10 @@ func spawn_ragdoll() -> void:
 	ragdoll.global_position = get_parent().global_position
 	ragdoll.z_index = get_parent().z_index
 	ragdoll.global_rotation = get_parent().global_rotation
-	ragdoll.add_child(sprite.duplicate())
-	ragdoll.add_child(collision_shape.duplicate())
 	var shadow = Shadow.new()
 	ragdoll.add_child(shadow)
+	ragdoll.add_child(sprite.duplicate())
+	ragdoll.add_child(collision_shape.duplicate())
 	(func(): container.add_child(ragdoll)).call_deferred()
 	var impulse_direction = Vector2.from_angle(-PI / 4)
 	var impulse_vector = impulse_direction * 200
