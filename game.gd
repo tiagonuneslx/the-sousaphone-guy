@@ -10,6 +10,9 @@ class_name Game
 @onready var ground: Node2D = $Ground
 @onready var ceiling: Node2D = $Ceiling
 
+@export var base_scroll_speed := 140.0
+var scroll_speed: float
+
 var best_score: int = 0
 
 func _ready() -> void:
