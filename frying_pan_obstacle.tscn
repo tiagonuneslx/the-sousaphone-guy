@@ -23,15 +23,8 @@ texture = ExtResource("1_swpmt")
 
 [node name="RagdollSpawner" parent="." instance=ExtResource("5_h634x")]
 visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="RagdollSpawner"]
-position = Vector2(10, 0.5)
-texture = ExtResource("1_swpmt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollSpawner"]
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_h634x")
-debug_color = Color(0.86512977, 0.3169942, 0.43462604, 0.41960785)
+inertia = 200.0
+mass = 5.0
 
 [node name="Shadow" parent="." instance=ExtResource("6_oxs2h")]
 
