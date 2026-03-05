@@ -5,14 +5,22 @@ class_name RagdollSpawner
 var inertia: float = 0.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:kg")
 var mass: float = 1.0
+@export
+var impulse_magnitude: float = 300
 
-var sprite: Sprite2D = null
-var collision_shape: CollisionShape2D = null
+var sprite: Sprite2D
+var collision_shape: CollisionShape2D
+var collision_polygon: CollisionPolygon2D
 
 
 func setup(p_sprite: Sprite2D, p_collision_shape: CollisionShape2D) -> void:
 	sprite = p_sprite
 	collision_shape = p_collision_shape
+
+
+func setup_with_polygon(p_sprite: Sprite2D, p_collision_polygon: CollisionPolygon2D) -> void:
+	sprite = p_sprite
+	collision_polygon = p_collision_polygon
 
 
 func spawn_ragdoll() -> void:
@@ -30,8 +38,11 @@ func spawn_ragdoll() -> void:
 	var shadow = Shadow.new()
 	ragdoll.add_child(shadow)
 	ragdoll.add_child(sprite.duplicate())
-	ragdoll.add_child(collision_shape.duplicate())
+	if(collision_shape != null):
+		ragdoll.add_child(collision_shape.duplicate())
+	if(collision_polygon != null):
+		ragdoll.add_child(collision_polygon.duplicate())
 	(func(): container.add_child(ragdoll)).call_deferred()
 	var impulse_direction = Vector2.from_angle(-PI / 3)
-	var impulse_vector = impulse_direction * 300
+	var impulse_vector = impulse_direction * impulse_magnitude
 	ragdoll.apply_impulse(impulse_vector, Vector2(-8, 0))

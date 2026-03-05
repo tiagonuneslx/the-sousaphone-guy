@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs7dfpwyb2ilj"]
+
+[ext_resource type="Script" uid="uid://yak41wyh6dcd" path="res://croissant_obstacle.gd" id="1_yqyux"]
+[ext_resource type="PackedScene" uid="uid://bip7twoywg8d4" path="res://despawner.tscn" id="2_v4sbm"]
+[ext_resource type="Texture2D" uid="uid://qwg4lvi5r6v" path="res://art/throwing_objects/croissant.png" id="3_vut4m"]
+[ext_resource type="PackedScene" uid="uid://6wfdnjwxavq1" path="res://ragdoll_spawner.tscn" id="4_84e2a"]
+[ext_resource type="PackedScene" uid="uid://chtkvd2ldiq4m" path="res://shadow.tscn" id="5_orju8"]
+[ext_resource type="PackedScene" uid="uid://bikwgjbe1u0ok" path="res://hitbox.tscn" id="6_wow0w"]
+
+[node name="CroissantObstacle" type="Node2D"]
+z_index = 3
+script = ExtResource("1_yqyux")
+
+[node name="Despawner" parent="." instance=ExtResource("2_v4sbm")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0.5)
+texture = ExtResource("3_vut4m")
+
+[node name="RagdollSpawner" parent="." instance=ExtResource("4_84e2a")]
+inertia = 160.0
+mass = 0.2
+
+[node name="Shadow" parent="." instance=ExtResource("5_orju8")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(-12, 3)
+rect = Rect2(-17, -19, 58, 34)
+
+[node name="Hitbox" parent="." instance=ExtResource("6_wow0w")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-22, 9, -21, 11, -19, 12, -17, 12, -15, 11, -9, 6, -5, 6, -3, 7, 3, 7, 5, 6, 9, 6, 15, 11, 17, 12, 19, 12, 22, 11, 22, 6, 20, 3, 18, 0, 15, -3, 13, -4, 7, -10, 5, -11, -5, -11, -7, -10, -14, -4, -18, 0, -21, 4, -22, 6)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="Despawner" method="despawn"]
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

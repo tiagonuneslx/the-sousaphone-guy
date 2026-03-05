@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b04aiwjncu7xf"]
 
 [ext_resource type="Script" uid="uid://d7j8oubjlhym" path="res://frying_pan_obstacle.gd" id="1_h1bxq"]
-[ext_resource type="Texture2D" uid="uid://cc0c2cwx23toc" path="res://art/frying-pan.png" id="1_swpmt"]
+[ext_resource type="Texture2D" uid="uid://cc0c2cwx23toc" path="res://art/throwing_objects/frying-pan.png" id="1_swpmt"]
 [ext_resource type="PackedScene" uid="uid://bip7twoywg8d4" path="res://despawner.tscn" id="3_1y0jf"]
 [ext_resource type="PackedScene" uid="uid://bikwgjbe1u0ok" path="res://hitbox.tscn" id="4_h634x"]
 [ext_resource type="PackedScene" uid="uid://6wfdnjwxavq1" path="res://ragdoll_spawner.tscn" id="5_h634x"]
