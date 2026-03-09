@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4wlshil6gj0e"]
+[gd_scene load_steps=19 format=3 uid="uid://c4wlshil6gj0e"]
 
 [ext_resource type="PackedScene" uid="uid://ibqei0hxkrs7" path="res://background.tscn" id="1_2bh5a"]
 [ext_resource type="Script" uid="uid://dckr7drwioe17" path="res://game.gd" id="1_lp6ye"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bs7dfpwyb2ilj" path="res://croissant_obstacle.tscn" id="7_e8heu"]
 [ext_resource type="PackedScene" uid="uid://b04aiwjncu7xf" path="res://frying_pan_obstacle.tscn" id="7_eow3j"]
 [ext_resource type="PackedScene" uid="uid://b3ikdvndyjwoq" path="res://state_machine.tscn" id="8_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://odu6loalxleh" path="res://kitchen_roll_obstacle.tscn" id="8_rvswv"]
 [ext_resource type="Script" uid="uid://bvcwqnuj51385" path="res://play_state.gd" id="9_vef74"]
 [ext_resource type="Script" uid="uid://b2ge7rfkft3i" path="res://game_over_state.gd" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://1ujp16yj4jcj" path="res://debug_control_group.gd" id="10_lc2xo"]
@@ -35,7 +36,7 @@ position = Vector2(140, 330)
 
 [node name="ObstacleSpawner" type="Node2D" parent="."]
 script = ExtResource("5_lc2xo")
-obstacle_scenes = Array[PackedScene]([ExtResource("7_eow3j"), ExtResource("7_e8heu")])
+obstacle_scenes = Array[PackedScene]([ExtResource("7_eow3j"), ExtResource("7_e8heu"), ExtResource("8_rvswv")])
 
 [node name="SpawnTimer" type="Timer" parent="ObstacleSpawner"]
 wait_time = 2.0
