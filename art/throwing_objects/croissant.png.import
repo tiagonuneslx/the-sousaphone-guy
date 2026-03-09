@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc0c2cwx23toc"
-path="res://.godot/imported/frying-pan.png-f4b60febc07588052c284828f1f35f43.ctex"
+uid="uid://qwg4lvi5r6v"
+path="res://.godot/imported/croissant.png-f5443930c0427ae555d45dbd59d29611.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/frying-pan.png"
-dest_files=["res://.godot/imported/frying-pan.png-f4b60febc07588052c284828f1f35f43.ctex"]
+source_file="res://art/throwing_objects/croissant.png"
+dest_files=["res://.godot/imported/croissant.png-f5443930c0427ae555d45dbd59d29611.ctex"]
 
 [params]
 

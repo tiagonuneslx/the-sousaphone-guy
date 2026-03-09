@@ -1,10 +1,10 @@
 extends Node2D
-class_name FryingPanObstacle
+class_name CroissantObstacle
 
 @export var base_speed := 260.0
 
 func _ready() -> void:
-	$RagdollSpawner.setup($Sprite2D, $Hitbox/CollisionShape2D)
+	$RagdollSpawner.setup_with_polygon($Sprite2D, $Hitbox/CollisionPolygon2D)
 
 
 func _process(delta: float) -> void:
